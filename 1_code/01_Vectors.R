@@ -115,7 +115,7 @@ c(1, 2, 3, 4) * c(3, 5)
 # When the length of the longer vector is not a multiple of the shorter vector, recycling is incomplete and R gives a warning message
 1:5 * c(1, 10, 100)
 
-# Subsetting vectors ####
+# 1.6 Subsetting vectors ####
 
 # Creating subsets of data is one of the fundamental operations in data analysis.
 # Subsetting with numeric vectors of indices: providing an index within the [] operator
@@ -151,3 +151,31 @@ x[x>85 & x<90]
 x[x>92 | x<86]
 # If none of the elements satisfies the require condition (which results in the logical vector having all FALSE values), it results an empty vector
 x[x>90 & x<90]
+
+# 1.7 Missing values ####
+
+# Missing values can arise in many situations during data collection and analysis, either when the required information could not be acquired for some reason or when, due to certain circumstances, we would like to exclude some data from an analysis by marking them as missing.
+# In the spatial data analysis context, it can be that some districts in an area we surveyed were inaccessible for data collection by the researcher or some parts of an aerial image were clouded and we could not digitize features of interest there.
+# The special value that marks missing value in R is NA. NA values are created when there are not enough information to provide a result.
+x <- 1:10
+x[100]
+
+# Missing value and its effect on data
+x <- c(2, 5, 1, 0)
+mean(x)
+x[2] <- NA
+mean(x) # also results in NA.
+
+# Detecting missing value in vectors with is.na() function
+is.na(x)
+# At times it's more convenient to check which values are not NA
+!is.na(x)
+# E.g, create a subset of only the non-missing elements in x
+x[!is.na(x)]
+
+# Performing calculations on vectors with missing values
+mean(x[!is.na(x)])
+# Many functions that require all values to be non-missing have na.rm parameter which indicates whether to remove the NA or not before executing the calcucation.
+x <- c(3, 8, 2, NA, 1, 7, 5, NA, 9)
+mean(x, na.rm = TRUE)
+max(x, na.rm = TRUE)
