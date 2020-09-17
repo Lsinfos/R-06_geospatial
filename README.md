@@ -3,18 +3,20 @@ Learning R for Geospatial Analysis
 
 1. Vectors
 
-2. Time series
+2. Functions
 
-3. Tables
+3. Time series
 
-4. Rasters
+4. Tables
 
-5. Points, Lines and Polygons
+5. Rasters
 
-6. Modifying Rasters and Analyzing Raster Time Series
+6. Points, Lines and Polygons
 
-7. Combining Vector and Raster Datasets
+7. Modifying Rasters and Analyzing Raster Time Series
 
-8. Spatial Interpolation of Point Data
+8. Combining Vector and Raster Datasets
 
-9. Advanced Visualization of Spatial Data
+9. Spatial Interpolation of Point Data
+
+10. Advanced Visualization of Spatial Data
