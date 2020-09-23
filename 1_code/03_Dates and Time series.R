@@ -5,7 +5,7 @@
 # Reading climatic data ####
 
 # Load the real-world data from the National Oceanic and Atmospheric Administration (NOAA) National Climatic Data Center. This file contains daily rainfall and temperature data from a meteorological station at Albuquerque International Airport, New Mexico from March 1, 1931 to May 15, 2014.
-dat <- read.csv("NOAA.csv", stringsAsFactors = FALSE) # a CSV file is used to store plain tabular data with no additional features that are common in spreadsheet files like XLS.
+dat <- read.csv("Albuquerque.csv") # a CSV file is used to store plain tabular data with no additional features that are common in spreadsheet files like XLS.
 # Assign the values in DATE and TMAX columns to two separate vectors
 time <- dat$DATE # represents time
 tmax <- dat$TMAX # stands for maximum temperature.
