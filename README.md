@@ -9,7 +9,7 @@ Learning R for Geospatial Analysis
 
 4. Tables
 
-5. Controlling Code Execution
+5. Flow Control
 
 6. Rasters
 
