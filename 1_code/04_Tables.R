@@ -67,3 +67,43 @@ str(dat)
 df$num
 df$lower
 df$upper
+# Replace the missing values of measurements which are marked as -9999, a commonl encountered convention, with NA
+dat$tpcp[dat$tpcp == -9999] <- NA
+dat$mmxt[dat$mmxt == -9999] <- NA
+dat$mmnt[dat$mmnt == -9999] <- NA # $ operator refers to columns of the data.frame object (dat) rather than independent vectors.
+# Convert tpcp to mm units and mmxt and mmnt values to degree Celsius
+dat$tpcp <- dat$tpcp / 10
+dat$mmxt <- dat$mmxt / 10
+dat$mmnt <- dat$mmnt / 10
+
+# Using [] operator for indexing a data.frame object requires 2 dimensions
+df[2,3] # first index refers to rows, second index refers to columns.
+# Leaving and empty space instead of the row's or column's index indicates selecting all elements of the respective dimension
+df[2,] # returns a data frame since 3 columns are involved.
+df[,3] # returns a vector.
+is.data.frame(df[,3])
+# The parameter "drop" can be used to suppress the data frame simplification to remain a data frame no matter what
+df[ ,3, drop = FALSE]
+
+# Using a character vector that indicates the names of the rows/columns
+df[df$lower %in% c("a", "d"), c("lower", "upper")] # request to get a subset of df with the rows being where the values of the lower column are either "a" or "d", and the columns are both lower and upper.
+
+# Logical vectors could also be used to indicate whether to retain each row/column of the data frame and create a subset out of it.
+# complete.cases() returns a logical vector, indicating whether each row (case) is complete (has no NA value in it). The resulting logical vector can be used to remove the incommplete rows from a table:
+dat[complete.cases(dat),]
+# or to locate the cases with NA value
+dat[!complete.cases(dat),]
+
+# Calculating new data fields ####
+
+# New values can be assigned to a column with $ operator. If the assigned column does not exist in the table, a new column will be created to accomodate the data
+df$word[df$num == 2] <- "Two"
+df
+# Create two new columns in the climatic data holding the year and the month of each measurement. First, convert the date column into Date object
+dat$date <- as.Date(as.character(dat$date), format = "%Y%m%d")
+# Extract the years and months
+dat$month <- as.numeric(format(dat$date, "%m"))
+dat$year <- as.numeric(format(dat$date, "%Y"))
+head(dat)
+# Writing this new data frame to a csv file ####
+write.csv(dat, "dat.csv")
