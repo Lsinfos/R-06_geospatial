@@ -11,14 +11,16 @@ Learning R for Geospatial Analysis
 
 5. Flow Control
 
-6. Rasters
+6. Packages
 
-7. Points, Lines and Polygons
+7. Rasters
 
-8. Modifying Rasters and Analyzing Raster Time Series
+8. Points, Lines and Polygons
 
-9. Combining Vector and Raster Datasets
+9. Modifying Rasters and Analyzing Raster Time Series
 
-10. Spatial Interpolation of Point Data
+10. Combining Vector and Raster Datasets
 
-11. Advanced Visualization of Spatial Data
+11. Spatial Interpolation of Point Data
+
+12. Advanced Visualization of Spatial Data
