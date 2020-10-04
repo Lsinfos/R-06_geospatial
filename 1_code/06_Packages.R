@@ -78,3 +78,27 @@ spain_annual <- ddply(dat3, .(station, variable, year), summarize,
 head(spain_annual)
 # Save this data frame for later use, too
 write.csv(spain_annual, "spain_annual.csv", row.names = FALSE)
+
+# Joining tables with join() ####
+
+# Working with spatial data often requires to join data from an external table (csv, Excel...) with the attribute table of a spatial data set (such as ESRI shapefile). Base R provides merge function to perform such tasks, but the simpler way is using join function from plyr package.
+# Read a table that contains a serie of dates
+dates <- read.csv("modis_dates.csv")
+head(dates) # this table indicates the dates of the MODIS satellite images acquisition with the image column corresponding to bands in a multiband raster.
+# Create a column for Date class
+dates$Date <- as.Date(paste
+                      (dates$year, dates$month, dates$day, sep = "-"))
+head(dates)
+# Now create a table of seasons
+month <- c(12, 1:11)
+season <- rep(c("winter", "spring", "summer", "fall"), each = 3)
+seasons <- data.frame(month, season)
+seasons # The table indicates which season a given month belongs to.
+# Join the two tables: dates and seasons
+dates <- join(dates, seasons, "month") # by default join() performs a left join (type = "left) which retains all rows of the left table. 
+head(dates) # the 3rd argument (by = "month") of join() indicates which column to join. 
+
+# Joining the stations and coordinate summary from spain_stations and the aggregated annual climatic data spain_annual.
+combined <- join(spain_stations, spain_annual, 
+                 by = "station", type = "right")
+head(combined) # this table contains duplicate data since the latitude, longitude and elevation records are identical in each station/variable/year. In such cases, it's more efficient to keep two separate tables.
