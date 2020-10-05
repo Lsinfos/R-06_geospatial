@@ -1,26 +1,32 @@
 # R-06-Geospatial-Analysis
-Learning R for Geospatial Analysis
+## **Learning R for Geospatial Analysis**
 
-1. Vectors
+**Basic R Components**
 
-2. Functions
+ *1. Vectors*
 
-3. Time series
+ *2. Functions*
 
-4. Tables
+ *3. Time series*
 
-5. Flow Control
+ *4. Tables*
 
-6. Packages
+ *5. Flow Control*
 
-7. Rasters
+ *6. Packages*
+ 
+ ***
+ 
+ **R in Geospatial Analysis**
+ 
+ *7. Rasters*
 
-8. Points, Lines and Polygons
+ *8. Points, Lines and Polygons*
 
-9. Modifying Rasters and Analyzing Raster Time Series
+ *9. Modifying Rasters and Analyzing Raster Time Series*
 
-10. Combining Vector and Raster Datasets
+ *10. Combining Vector and Raster Datasets*
 
-11. Spatial Interpolation of Point Data
+ *11. Spatial Interpolation of Point Data*
 
-12. Advanced Visualization of Spatial Data
+ *12. Advanced Visualization of Spatial Data*
