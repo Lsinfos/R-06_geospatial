@@ -3,27 +3,41 @@
 
 **Basic R Components**
 
- *1. Vectors*
+ 1. Vectors
+ 
+    *- Different types of vectors*
+ 
+    *- Objects*
+ 
+    *- Summarizing properties*
+ 
+    *- Elementwise operations*
+ 
+    *- Recycling principle*
+ 
+    *- Subsetting vectors*
+ 
+    *- Missing values*
 
- *2. Functions*
+ 2. Functions
 
- *3. Time series*
+ 3. Time series
 
- *4. Tables*
+ 4. Tables
 
- *5. Flow Control*
+ 5. Flow Control
 
- *6. Packages*
+ 6. Packages
  
  ***
  
  **R in Geospatial Analysis**
  
- *7. Rasters*
+ 7. Rasters
 
- *8. Points, Lines and Polygons*
+ 8. Points, Lines and Polygons
 
- *9. Modifying Rasters and Analyzing Raster Time Series*
+ 9. Modifying Rasters and Analyzing Raster Time Series
 
  *10. Combining Vector and Raster Datasets*
 
