@@ -39,8 +39,8 @@
 
  9. Modifying Rasters and Analyzing Raster Time Series
 
- *10. Combining Vector and Raster Datasets*
+ 10. Combining Vector and Raster Datasets
 
- *11. Spatial Interpolation of Point Data*
+ 11. Spatial Interpolation of Point Data
 
- *12. Advanced Visualization of Spatial Data*
+ 12. Advanced Visualization of Spatial Data
