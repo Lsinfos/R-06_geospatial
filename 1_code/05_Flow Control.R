@@ -1,8 +1,8 @@
-# FLOW CONTROL ####
+# 5. FLOW CONTROL ####
 
 # One of the most important themes in programming is the flow control - operations that are used to control the sequences of our code execution. 
 
-# Conditional statements ####
+# 5.1 Conditional statements ####
 
 # The purpose of conditional statements is to condition the execution of a given code section. 
 x <- 3
@@ -33,7 +33,7 @@ dat <- read.csv("dat.csv")
 dat$mmxt[1:7]
 ifelse(dat$mmxt[1:7] < 10, "cold", "warm")
 
-# Loops ####
+# 5.2 Loops ####
 
 # Loops are used when a code selection needs to be executed repeatedly. The way the number of times a code selection is determined distinguishes the different types of loops.
 # For loop is esp useful in many data analysis tasks. The code selection is executed for a predetermined number of times. This is equal to the number of elements in the vector initiating the loop.
@@ -45,7 +45,7 @@ for(i in 1:5) {print(i)} # the code is executed 5 times as the number of element
 # The loop vector (e.g, 1:5)
 # The code selection to be executed repeatedly (e.g, print(i))
 
-# Apply family  functions ####
+# 5.3 Apply family  functions ####
 
 # The collection of apply functions are used to apply a function we choose over subsets of object, and then join the results to form into a single object once again. The apply functions are a defining feature of R, they replace the necessity to write explicit loops in many common situations in data analysis, which make the code shorter and more elegant.
 # The tapply() is used to apply a function over different selections of a vector, which requires 3 arguments:

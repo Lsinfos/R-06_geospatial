@@ -2,7 +2,7 @@
 
 # A time serie is a sequence of values, each associated with a time index. The simplest way to represent a time series is to have two separate vectors with the same length of data values, and time, each element corresponding to the respective vector.
 
-# Reading climatic data ####
+# 3.1 Reading climatic data ####
 
 # Load the real-world data from the National Oceanic and Atmospheric Administration (NOAA) National Climatic Data Center. This file contains daily rainfall and temperature data from a meteorological station at Albuquerque International Airport, New Mexico from March 1, 1931 to May 15, 2014.
 dat <- read.csv("Albuquerque.csv") # a CSV file is used to store plain tabular data with no additional features that are common in spreadsheet files like XLS.
@@ -10,7 +10,7 @@ dat <- read.csv("Albuquerque.csv") # a CSV file is used to store plain tabular d
 time <- dat$DATE # represents time
 tmax <- dat$TMAX # stands for maximum temperature.
 
-# Converting character values to dates ####
+# 3.2 Converting character values to dates ####
 
 # Dates can be represented in R using a special format which allows certain special operations to be performed (not possible with characters). There are several classes for dates and time in R. The simplest class is called Date, which is used to represent calendar dates.
 x <- Sys.Date() # return the current date.
@@ -59,7 +59,7 @@ time[1:10]
 class(time)
 # Now that is a vector of dates, we have more freedom to treat data as a time series.
 
-# Examine time series ####
+# 3.3 Examine time series ####
 
 # View the documentation on climic data from NOAA
 View(dat)
@@ -87,7 +87,7 @@ all_dates[which(!all_dates %in% time)]
 max(tmax, rm.na = TRUE)
 time[which.max(tmax)] # on June 26th 1994 the highest temperature was 41.7.
 
-# Creating subsets based on dates ####
+# 3.4 Creating subsets based on dates ####
 
 # If we're interested in a particular subset of the time series, e.g, from December 31st 2005 to January 1st 2014, we could create a subset of the dates in that time period. First, create a logical vector pointing at all the dates we want to keep:
 w <- time > as.Date("2005-12-31") & time < as.Date("2014-1-1")
@@ -99,7 +99,7 @@ tmax <- tmax[w]
 # Note that the selection is not inclusive of the end dates, since we use > and < operators, instead of >= and <=.
 range(time)
 
-# Introducing graphical functions ####
+# 3.5 Introducing graphical functions ####
 
 # Display vectors using base graphics
 plot(tmax) # the value of the tmax vector are plotted on the y axis as a function of their index on the x axis.

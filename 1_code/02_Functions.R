@@ -23,8 +23,6 @@ seq(to = 10, by = 1, from = 5)
 seq(5, 10, 1)
 seq(5, 10) # default by parameter is 1.
 
-# 2.2 Creating vectors with parameters ####
-
 # New vectors populated with default values (0 for numeric, "" for character, and FALSE for logical) can be created via vector() function, specifying the mode and length parameters
 vector(mode = "numeric", length = 2)
 vector(mode = "character", length = 10)
@@ -42,7 +40,7 @@ substr(x, start = 1, stop = 14)
 substr(x, 6, 14)
 substr(x, 1, 3)
 
-# 2.3 Writing new functions ####
+# 2.2 Writing functions ####
 
 # A function is an object loaded into the computer's temporary and can be activated (usually with specific arguments) to perform a certain action. 
 # Aside from built-in functions in R, new functions could be defined. E.g:
@@ -71,7 +69,7 @@ result
 # The return(x_plus_five) expression can be skipped since by default, the function returns the last created object (which is x_plus_five)
 add_five <- function(x) x + 5
 
-# 2.4 Setting default values for the arguments ####
+# 2.3 Function arguments ####
 
 # We can assign default arguments to parameters during the function's definition. This way, we will be able to skip some of the parameters during a function call. 
 # If we call a functions without default value, it will result in error 

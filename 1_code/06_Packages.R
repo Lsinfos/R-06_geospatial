@@ -1,4 +1,4 @@
-# PACKAGES ####
+# 6. PACKAGES ####
 
 # All predefined objects in R are collected in libraries or packages. Several are distributed with the R installation file, and some of them are automatically loaded into computer memory when starting R. E.g, to use the lattice pakage which is automatically installed with R, we still need to load it first
 library(lattice)
@@ -9,7 +9,7 @@ install.packages("plyr")
 library(reshape2)
 library(plyr)
 
-# Reshape data wire reshape2 ####
+# 6.1 Reshape data wire reshape2 ####
 
 # Reshaping operations are an inevitable step of every data analysis process since most of the time, the data we work with will be structured differently from what is required to use a given function or type of software.
 # A wide table consists of columns for each measured variable, e.g
@@ -36,7 +36,7 @@ dat2 <- dcast(dat_melt, year ~ variable, mean, na.rm = TRUE)
 head(dat2)
 # The disadvantage of aggregation with dcast() is that we must apply the same function across all variables.
 
-# Aggregating with plyr ####
+# 6.2 Aggregating with plyr ####
 
 # The plyr package is intended to comprise an alternative, in many cases an easier one, to apply and other base R functions.
 # ddply function operates on a data frame, splits the table to subsets according to the unique levels in one or more columns. The data from each subset is then used to calculate a single value, for each of the new columns in the new data frame.
@@ -79,7 +79,7 @@ head(spain_annual)
 # Save this data frame for later use, too
 write.csv(spain_annual, "spain_annual.csv", row.names = FALSE)
 
-# Joining tables with join() ####
+# 6.3 Joining tables with join() ####
 
 # Working with spatial data often requires to join data from an external table (csv, Excel...) with the attribute table of a spatial data set (such as ESRI shapefile). Base R provides merge function to perform such tasks, but the simpler way is using join function from plyr package.
 # Read a table that contains a serie of dates

@@ -2,7 +2,7 @@
 
 # Working with tables is central to programming in R, both with regards to spatial analysis (e.g, working with attribute tables of geometries).
 
-# Data.frame class ####
+# 4.1 Data.frame class ####
 
 # The data.frame class is the basic class to represent tabular data in R. A data.frame object is essentially a collection of vectors, all with the same length. The vectors don't have to be the same type, therefore, data.frame object is particularly suitable to represent data with different variables in columns and different cases in rows.
 # Creating a data.frame object by combining available vectors
@@ -22,7 +22,7 @@ rbind(df, row5)
 word <- c("One", "Two", "Three", "Four") 
 cbind(df, word)
 
-# Import CSV files ####
+# 4.2 Import CSV files ####
 
 # Another common method to create data.frame object is importing tabular data from a CSV file using read.csv() function
 dat <- read.csv("Spain.csv") # contains monthly records of precipitation and temperature in Spain for a periods of 30 years. 
@@ -41,7 +41,7 @@ tail(dat)
 # MMXT: the mean monthly maximum temperature (0.1 degree Celcius units)
 # MMNT: the mean monthly minimum temperature (0.1 degree Celcius units)
 
-# Examine the structure of a data.frame object ####
+# 4.3 Examine the structure of a data.frame object ####
 
 # Get the number of rows and columns using nrow() and ncol() functions, respectively. 
 nrow(dat)
@@ -61,7 +61,7 @@ colnames(dat)
 # It is frequently useful to examine the structure of a given object using the str(). This function prints the structure of its argument showing the data types of its components and the relations between them. 
 str(dat)
 
-# Subsetting data.frame objects ####
+# 4.4 Subsetting data.frame objects ####
 
 # Subsetting a data frame by accessing separate columns with $ operator
 df$num
@@ -94,7 +94,7 @@ dat[complete.cases(dat),]
 # or to locate the cases with NA value
 dat[!complete.cases(dat),]
 
-# Calculating new data fields ####
+# 4.5 Calculating new data fields ####
 
 # New values can be assigned to a column with $ operator. If the assigned column does not exist in the table, a new column will be created to accomodate the data
 df$word[df$num == 2] <- "Two"
