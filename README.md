@@ -20,6 +20,12 @@
     *- Missing values*
 
  2. Functions
+ 
+    *- Parameters*
+    
+    *- Writing functions*
+ 
+    *- Function arguments^
 
  3. Time series
 
