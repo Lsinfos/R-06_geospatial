@@ -25,7 +25,7 @@
     
     *- Writing functions*
  
-    *- Function arguments^
+    *- Function arguments*
 
  3. Time series
 
