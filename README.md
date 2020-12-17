@@ -1,4 +1,3 @@
-# R-06-Geospatial-Analysis
 ## **Learning R for Geospatial Analysis**
 
 **Basic R Components**
