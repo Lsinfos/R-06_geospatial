@@ -1,51 +1,22 @@
-## **Learning R for Geospatial Analysis**
+## ** R FOR GEOSPATIAL ANALYSIS**
 
-**Basic R Components**
+**1. Working with Vectors and Time Series**
 
- 1. Vectors
+   *- Different types of vectors*
  
-    *- Different types of vectors*
+   *- Objects*
  
-    *- Objects*
+   *- Operations on vectors*
  
-    *- Summarizing properties*
+   *- Subsetting vectors*
  
-    *- Elementwise operations*
+   *- Missing values*
  
-    *- Recycling principle*
+   *- Dates and Time Seires*
  
-    *- Subsetting vectors*
+**2. Working with Tables**
  
-    *- Missing values*
+**3. Working with Rasters**
 
- 2. Functions
- 
-    *- Parameters*
-    
-    *- Writing functions*
- 
-    *- Function arguments*
+**4. Working with Points, Lines and Polygons**
 
- 3. Time series
-
- 4. Tables
-
- 5. Flow Control
-
- 6. Packages
- 
- ***
- 
- **R in Geospatial Analysis**
- 
- 7. Rasters
-
- 8. Points, Lines and Polygons
-
- 9. Modifying Rasters and Analyzing Raster Time Series
-
- 10. Combining Vector and Raster Datasets
-
- 11. Spatial Interpolation of Point Data
-
- 12. Advanced Visualization of Spatial Data
