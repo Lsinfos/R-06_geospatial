@@ -1,4 +1,4 @@
-"","station","station_name","elevation","latitude","longitude","date","tpcp","mmxt","mmnt","month","year"
+"","station","station_name","elev","latitude","longitude","date","tpcp","mmxt","mmnt","month","year"
 "1","GHCND:SP000060010","IZANA SP",2371,28.3089,-16.4992,1984-01-01,51.4,5.6,-0.5,1,1984
 "2","GHCND:SP000060010","IZANA SP",2371,28.3089,-16.4992,1984-02-01,0,9.8,2.8,2,1984
 "3","GHCND:SP000060010","IZANA SP",2371,28.3089,-16.4992,1984-03-01,68.7,7.2,0.2,3,1984
