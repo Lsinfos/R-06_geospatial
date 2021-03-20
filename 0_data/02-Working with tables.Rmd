@@ -1,0 +1,237 @@
+---
+title: "WORKING WITH TABLES"
+source: Learning R for Spatial Analysis_Michael Dorman
+---
+
+Working with tables is central to programming in R, both with regards to spatial analysis (for example, working with attribute tables of geometries) and more generally.
+
+### 2.1 Using data frames to represent tabular data
+The `data.frame` class is the basic class to represent tabular data in R. A *data frame* is essentially a collection of vectors, all with the same length. The vectors do not have to be the same type, therefore, data frame is particularly suitable to represent data with different variables in columns and different cases in rows.
+One way to create a data frame is to combine several vectors that are already present in the R environment. This can be achieved with the `data.frame` function with the arguments being the names of the vector objects we would like to combine.
+```{r}
+num <- 1:4
+lower <- c("a", "b", "c", "d")
+upper <- c("A", "B", "C", "D")
+df <- data.frame(num, lower, upper)
+df
+```
+The previously independent vectors now comprise columns in 
+`df`. The names of the columns are the names of the original vectors: `num`, `lower`, and `upper`. Rows have names as well; these are automatically assigned with the characters 1, 2, 3, and 4.
+The data frame could be also created in a single step.
+```{r}
+data.frame(num = 1:4, 
+                 lower = c("a", "b", "c", "d"),
+                 upper = c("A", "B", "C", "D"))
+```
+However, the vectors have to have the same length; otherwise, an error would have occurred since all columns of the data frame must
+have the same length.
+Adding rows to an existing data frames using `rbind()`:
+```{r}
+row5 <- c(5, "e", "E")
+rbind(df, row5)
+```
+Alternatively, add a fourth column using `cbind()`:
+```{r}
+word <- c("One", "Two", "Three", "Four") 
+cbind(df, word)
+```
+
+### 2.2 Creating a table from a csv file
+Another common method to create data.frame object is importing tabular data from a CSV file using `read.csv()`. 
+```{r}
+dat <- read.csv("Spain.csv")
+```
+The *Spain.csv* data contains monthly records of precipitation and temperature in Spain for a periods of 30 years (source: NOAA climatic archive).
+Print only a few first rows of the data frame to examine, as this table is very large:
+```{r}
+head(dat)
+```
+Similarly, tail() prints last few rows.
+```{r}
+tail(dat)
+```
+The column's contents are as follows:
+
+-    `STATION`: the meteorological station identification code
+-    `STATION_NAME`: the meteorological station's name
+-    `ELEVATION`: the elevation above sea level of the station (in meters)
+-    `LATTITUDE`: the latitude of the station (decimal degrees)
+-    `LONGITUDE`: the longitude of the station (decimal degrees)
+-    `DATE`: the date of the measurement
+-    `TPCP`: total monthly precipitation (0.1mm unit)
+-    `MMXT`: the mean monthly maximum temperature (0.1 degree Celcius units)
+-    `MMNT`: the mean monthly minimum temperature (0.1 degree Celcius units)
+
+The dates are recorded in the `%Y%m%d` format. However, since the data is monthly, the day component is not informative (all days are coded as 01. The missing values of measurements are marked as -9999, a commonly encountered convention.
+
+### 2.3 Examine the structure of a data frame
+Get the number of rows and columns using `nrow()` and `ncol()` functions, respectively:
+```{r}
+nrow(dat)
+ncol(dat)
+```
+We can get the lengths of both row and column dimensions using the `dim()`. 
+```{r}
+dim(dat)
+```
+We can also get the names of the rows and columns (getting column names is often more useful) as a character vector using the functions `rownames` and `colnames`.
+```{r}
+colnames(dat)
+```
+Assignment into column names can be made to replace the existing names with new ones. For example, change the name of the third column from `ELEVATION` to `Elev`:
+```{r}
+colnames(dat)[3] <- "Elev"
+```
+Similarly, we can convert all column names of the data frame ofrom uppercase to lowercase.
+```{r}
+colnames(dat) <- tolower(colnames(dat))
+colnames(dat)
+```
+It is frequently useful to examine the structure of a given object using `str()`. This function prints the structure of its argument showing the data types of its components and the relations between them. 
+```{r}
+str(dat)
+```
+There are two principal ways to create a subset of a data frame. The first involves accessing separate columns, using the column names, with the `$` operator. 
+```{r}
+df$num
+df$lower
+df$upper
+```
+The second involves providing the two vectors of indexes, names or logical values, with the `[]` operator. Replace the missing values of measurements which are marked as -9999, a common encountered convention, with `NA`:
+```{r}
+dat$tpcp[dat$tpcp == -9999] <- NA
+dat$mmxt[dat$mmxt == -9999] <- NA
+dat$mmnt[dat$mmnt == -9999] <- NA
+```
+Convert `tpcp` to mm units and `mmxt` and `mmnt` values to degree Celsius:
+```{r}
+dat$tpcp <- dat$tpcp / 10
+dat$mmxt <- dat$mmxt / 10
+dat$mmnt <- dat$mmnt / 10
+```
+
+Using the `[]` operator, we can obtain a subset of a data frame, which will include the intersection of any number of rows and columns. This requires two dimensions.
+```{r}
+df[2,3] #  the first index refers to rows and the second index refers to columns.
+```
+Leaving an empty space instead of the row's or column's index indicates selecting all elements of the respective dimension
+We can create a subset that is more than one element long, when the length of the vector of indexes is larger than 1:
+```{r}
+df[2,] # returns a data frame since 3 columns are involved.
+df[,3] # returns a vector.
+is.data.frame(df[,3])
+```
+By default, a subset of a data frame is converted into a simpler class if values from a single column are involved. The parameter `drop` can be used to suppress the data frame simplification to remain a data frame no matter what.
+```{r}
+df[ ,3, drop = FALSE]
+is.data.frame(df[ ,3, drop = FALSE])
+```
+Another method of subsetting a data frame are using logical and character vectors as indexes.
+```{r}
+df[df$lower %in% c("a", "d"), c("lower", "upper")]
+```
+In plain language, we are requesting to get the subset of `df` with the rows being where the values of the lower column are either "a" or "d", and the columns are both `lower` and `upper`.
+Logical vectors could also be used to indicate whether to retain each row/column of the data frame and create a subset out of it. The `complete.cases()` is an useful function which returns a logical vector, indicating whether each row (case) is complete (has no `NA` value in it). The resulting logical vector can be used to to locate the cases with `NA` value:
+```{r}
+dat[!complete.cases(dat),]
+```
+New values can be assigned to a column with `$` operator. If the assigned column does not exist in the table, a new column will be created to accommodate the data.
+
+```{r}
+df$word[df$num == 2] <- "Two"
+df
+```
+Create two new columns in the climatic data holding the year and the month of each measurement. First, convert the date column into *Date* object:
+```{r}
+dat$date <- as.Date(as.character(dat$date), 
+                    format = "%Y%m%d")
+```
+Extract the years and months:
+```{r}
+dat$month <- as.numeric(format(dat$date, "%m"))
+dat$year <- as.numeric(format(dat$date, "%Y"))
+head(dat)
+```
+Writing this new data frame to a csv file:
+```{r}
+write.csv(dat, "dat.csv")
+```
+
+### 2.4 Flow control
+One of the most important themes in programming is the *flow control* - operations that are used to control the sequences of our code execution.
+
+-    *Conditional statements*: the purpose of conditional statements is to condition the execution of a given code section.
+```{r}
+x <- 3
+if (x > 2) {print("x is large!")}
+```
+The condition should be an expression that returns a single logical value.
+```{r}
+x <- 0
+if (x > 2) {print("x is large!")}
+```
+the condition is `FALSE`, so the code is not executed. Nothing is printed on screen.
+Optionally, the else operator can be used to add another code section. This will be executed when the condition in if is `FALSE`.
+```{r}
+x <- 3
+if (x > 2) {
+  print("x is large!")
+  } else {print("x is small!")}
+```
+Run the code again with other value for `x` and the `else` statement is executed.
+```{r}
+x <- 1
+if (x > 2) {
+  print("x is large!")
+  } else {print("x is small!")}
+```
+`ifelse` is another conditional operator, specialized in working on vectors element by element. `ifelse` requires three arguments: a logical vector, a value for `TRUE`, and a value for `FALSE`. The result is a new vector with the same length where `TRUE` and `FALSE` are replaced with the alternative values.
+```{r}
+x <- c(-1, -8, 2, 5, -3, 5, -9)
+ifelse(x < 0, -x, x) # results a vector of absolute values.
+```
+Regarding the replacement values for `TRUE` and `FALSE`, the most useful modes of operation are either to have them as vectors of length 1 (and then they are recycled to fill the entire length of the logical vector) or to have them as vectors of the same 
+length as the logical vector (and then the elements of the logical vector are replaced with the respective elements either from the yes or no vector).
+For example, the first mode of operation is useful when we want to classify the values of a given vector into two categories, according to a condition:
+```{r}
+dat$mmxt[1:7]
+ifelse(dat$mmxt[1:7] < 10, "cold", "warm")
+```
+Here, we used a condition on the first seven values of the `mmxt` column in dat, to produce a logical vector, and then classified its values into "cold" (temperature below 10 degrees) or "warm".
+
+Loops are used when a code selection needs to be executed repeatedly. The way the number of times a code selection is determined distinguishes the different types of loops.
+`for` loop is esp useful in many data analysis tasks. The code selection is executed for a predetermined number of times. This is equal to the number of elements in the vector initiating the loop.
+```{r}
+for(i in 1:5) {print(i)}
+```
+The code is executed 5 times as the number of elements in the vector 1:5.
+The `apply` functions are a defining feature of R, they replace the necessity to write explicit loops in many common situations in data analysis, which make the code shorter and more elegant.
+The `tapply()` is used to apply a function over different selections of a vector, which requires three arguments:
+
+-    x: the vector that the function will operate upon
+-    index: the vector that defines the subset of x
+-    A function that will be applied to the subsets of x.
+
+ Using `tapply` to find out how many stations and which ones with at least one missing value within its respective time series of precipitation amount.  For an individual station (such as the one named "IZANA SP"), we could check whether its `tpcp` column contains at least one `NA`:
+```{R}
+any(is.na(dat[dat$station_name == "IZANA SP", "tpcp"])) # for one station.
+result <- tapply(dat$tpcp, dat$station_name, 
+                 function(x) any(is.na(x))) # for all stations.
+```
+The resulting array indicates, for each station, whether at least one precipitation measurement is missing. Check out the first 10 results:
+```{R}
+result[1:10]
+```
+Check how many stations have at least one missing value:
+```{r}
+sum(result)
+```
+Too see which stations these are, subset the result array with the array itself, since the `TRUE` values in that array exactly define the subset.
+```{r}
+result[result]
+```
+The values of the array are now unimportant (since they are all `TRUE`); we are actually interested only in the elements' names. The names attribute of an array can be extracted with the `names` function
+```{r}
+names(result[result])
+```
+These are the names of the stations we were looking for, in the form of a character vector.
